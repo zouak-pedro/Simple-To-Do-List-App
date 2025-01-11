@@ -50,12 +50,19 @@ function listDisplay() {
   for (let i = 1; i < list.length; i++) {
     document.querySelector(".title").innerHTML = "<H1>" + "Task App" + "</H1>";
 
-    const para = document.createElement("p");
-    const node = document.createTextNode(list[i].title);
-    para.appendChild(node);
+    // const para = document.createElement("p");
+    // const node = document.createTextNode(list[i].title);
+    // para.appendChild(node);
 
-    const element = document.getElementById("task_list");
-    element.appendChild(para);
+    // const element = document.getElementById("task_list");
+    // element.appendChild(para);
+
+    const tasklist = document.querySelector(".tasklist");
+    const newCart = document.createElement("div");
+
+    newCart.innerHTML = `<p>${list[i].title} </p> <button class="remove_task" onclick="removeTask(${i})">Remove</button> <button class="edit_task">Edit</button>`;
+    newCart.classList.add(".tasklist_item");
+    tasklist.appendChild(newCart);
   }
 }
 
@@ -64,9 +71,15 @@ listDisplay();
 
 const newTask = function () {
   let task_title = document.querySelector("input[name='Add_Task']").value;
-  console.log(task_title);
   addToList(task_title, "");
   document.querySelector("#task_list").innerHTML = "";
 
+  listDisplay();
+};
+
+const removeTask = function (taskID) {
+  console.log(`${taskID}; -> ${list[taskID].title}`);
+  list.splice(taskID, 1);
+  document.querySelector("#task_list").innerHTML = "";
   listDisplay();
 };
