@@ -13,10 +13,13 @@
   <div class="title">
     <h1>Task App</h1>
   </div>
-  <label for="task_title">Add Task</label>
-  <input type="text" name="task_title" id="task_title" placeholder="Add you task here">
-  <textarea name="task_description" id="task_description" placeholder="Description of the task"></textarea>
-  <input type="button" value="Add" onclick="newTask()">
+  <div class="head">
+
+    <input type="text" name="task_title" id="task_title" placeholder="Add you task here">
+    <textarea name="task_description" id="task_description" placeholder="Description of the task"></textarea>
+    <input type="button" value="Add Task" onclick="newTask()">
+
+  </div>
 
   <div id="task_list" class="tasklist">
 
