@@ -10,13 +10,19 @@
 </head>
 
 <body>
-  <div class="title"></div>
-  <label for="Add_Task">Add Task</label>
-  <input type="text" name="Add_Task" id="Add_Task">
+  <div class="title">
+    <h1>Task App</h1>
+  </div>
+  <label for="task_title">Add Task</label>
+  <input type="text" name="task_title" id="task_title" placeholder="Add you task here">
+  <textarea name="task_description" id="task_description" placeholder="Description of the task"></textarea>
   <input type="button" value="Add" onclick="newTask()">
+
   <div id="task_list" class="tasklist">
 
+
   </div>
+  <div class="error">error</div>
   <script src="script.js"></script>
 </body>
 

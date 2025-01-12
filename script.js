@@ -47,20 +47,12 @@ function addMass() {
 }
 
 function listDisplay() {
+  document.querySelector(".error").style.opacity = 0;
   for (let i = 1; i < list.length; i++) {
-    document.querySelector(".title").innerHTML = "<H1>" + "Task App" + "</H1>";
-
-    // const para = document.createElement("p");
-    // const node = document.createTextNode(list[i].title);
-    // para.appendChild(node);
-
-    // const element = document.getElementById("task_list");
-    // element.appendChild(para);
-
     const tasklist = document.querySelector(".tasklist");
     const newCart = document.createElement("div");
 
-    newCart.innerHTML = `<p>${list[i].title} </p> <button class="remove_task" onclick="removeTask(${i})">Remove</button> <button class="edit_task">Edit</button>`;
+    newCart.innerHTML = `<h3>${list[i].title} </h3> <p>${list[i].description}</p> <button class="remove_task" onclick="removeTask(${i})">Remove</button> <button class="edit_task" onclick="editTask(${i})">Edit</button>`;
     newCart.classList.add(".tasklist_item");
     tasklist.appendChild(newCart);
   }
@@ -70,8 +62,20 @@ addMass();
 listDisplay();
 
 const newTask = function () {
-  let task_title = document.querySelector("input[name='Add_Task']").value;
-  addToList(task_title, "");
+  let task_title = document.querySelector("input[name='task_title']").value;
+  let task_description = document.querySelector(
+    "textarea[name='task_description']"
+  ).value;
+  const isWhitespaceString = (str) => !/\S/.test(str);
+
+  if (task_title == " " || !task_title || isWhitespaceString(task_title)) {
+    document.querySelector(".error").style.opacity = 1;
+
+    document.querySelector(".error").innerText = "You need to add a task title";
+    return;
+  }
+  // task_description
+  addToList(task_title, task_description);
   document.querySelector("#task_list").innerHTML = "";
 
   listDisplay();
@@ -82,4 +86,8 @@ const removeTask = function (taskID) {
   list.splice(taskID, 1);
   document.querySelector("#task_list").innerHTML = "";
   listDisplay();
+};
+
+const editTask = function (taskID) {
+  console.log(taskID);
 };
