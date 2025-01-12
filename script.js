@@ -103,11 +103,47 @@ const removeTask = function (taskID) {
   console.log(`${taskID}; -> ${list[taskID].title}`);
   list.splice(taskID, 1);
   document.querySelector("#task_list").innerHTML = "";
+  document.querySelector(`input[type="button"]`).onclick = () => {
+    newTask();
+  };
+  document.querySelector(`input[type="button"]`).value = "Add Task";
   listDisplay();
 };
 
 const editTask = function (taskID) {
   console.log(taskID);
+  document.querySelector("input[name='task_title']").value = list[taskID].title;
+  document.querySelector("textarea[name='task_description']").value =
+    list[taskID].description;
+  document.querySelector(`input[type="button"]`).value = "Edit Task";
+  document.querySelector(`input[type="button"]`).onclick = () => {
+    let task_title = document.querySelector("input[name='task_title']").value;
+    let task_description = document.querySelector(
+      "textarea[name='task_description']"
+    ).value;
+    const isWhitespaceString = (str) => !/\S/.test(str);
+
+    if (task_title == " " || !task_title || isWhitespaceString(task_title)) {
+      document.querySelector(".error").style.opacity = 1;
+
+      document.querySelector(".error").innerText =
+        "You need to add a task title";
+      return;
+    }
+
+    list[taskID].title = task_title;
+    list[taskID].description = task_description;
+
+    listDisplay();
+    document.querySelector(`input[type="button"]`).value = "Add Task";
+    document.querySelector(`input[type="button"]`).onclick = () => {
+      newTask();
+    };
+  };
+};
+
+const updateTask = (id) => {
+  console.log("update");
 };
 
 const tasklist_item_check = function (item) {

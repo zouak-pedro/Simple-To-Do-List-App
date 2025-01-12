@@ -71,6 +71,12 @@ button:hover {
   left: 5px;
   top: 0.5rem;
 }
+.tasklist_item_check::after {
+  content: "✔";
+  color: #fff;
+  position: absolute;
+  left: 5px;
+}
 .tasklist_item_check:hover {
   cursor: pointer;
 }
