@@ -1,11 +1,11 @@
 "use strict";
-let list = [{}];
+let list = [];
 
 function addToList(title, description) {
   list.push({
     title: `${title}`,
     description: `${description}`,
-    status: "To-Do",
+    status: false,
   });
 }
 
@@ -47,14 +47,33 @@ function addMass() {
 }
 
 function listDisplay() {
+  document.querySelector("#task_list").innerHTML = "";
   document.querySelector(".error").style.opacity = 0;
-  for (let i = 1; i < list.length; i++) {
+  document.querySelector("input[name='task_title']").value = "";
+  document.querySelector("textarea[name='task_description']").value = "";
+
+  for (let i = 0; i < list.length; i++) {
     const tasklist = document.querySelector(".tasklist");
     const newCart = document.createElement("div");
 
-    newCart.innerHTML = `<h3>${list[i].title} </h3> <p>${list[i].description}</p> <button class="remove_task" onclick="removeTask(${i})">Remove</button> <button class="edit_task" onclick="editTask(${i})">Edit</button>`;
-    newCart.classList.add(".tasklist_item");
+    newCart.innerHTML = `<div id="item_${i}" class="tasklist_item_check" onclick="tasklist_item_check(${i})"></div><div class="tasklist_item_data"><h3>${list[i].title} </h3> <p>${list[i].description}</p></div> <div class="tasklist_item_button"> <button class="remove_task" onclick="removeTask(${i})">Remove</button> <button class="edit_task" onclick="editTask(${i})">Edit</button> </div>`;
+    newCart.classList.add("tasklist_item");
+    newCart.classList.add(`task${i}`);
     tasklist.appendChild(newCart);
+
+    if (list[i].status) {
+      document.querySelector(`#item_${i}`).style.backgroundColor = "#77E4C8";
+      document.querySelector(`.task${i}`).style.backgroundColor = "#4DA1A9";
+      document.querySelector(`.task${i} H3`).style.textDecorationLine =
+        "line-through";
+      document.querySelector(`.task${i} p`).style.textDecorationLine =
+        "line-through";
+    } else {
+      document.querySelector(`#item_${i}`).style.backgroundColor = "#fff";
+      document.querySelector(`.task${i}`).style.backgroundColor = "#36c2ce";
+      document.querySelector(`.task${i} H3`).style.textDecorationLine = "none";
+      document.querySelector(`.task${i} p`).style.textDecorationLine = "none";
+    }
   }
 }
 
@@ -74,10 +93,9 @@ const newTask = function () {
     document.querySelector(".error").innerText = "You need to add a task title";
     return;
   }
-  // task_description
-  addToList(task_title, task_description);
-  document.querySelector("#task_list").innerHTML = "";
 
+  addToList(task_title, task_description);
+  //document.querySelector("#task_list").innerHTML = "";
   listDisplay();
 };
 
@@ -90,4 +108,13 @@ const removeTask = function (taskID) {
 
 const editTask = function (taskID) {
   console.log(taskID);
+};
+
+const tasklist_item_check = function (item) {
+  console.log("click");
+  console.log(`${list[item].status}`);
+  list[item].status = !list[item].status;
+  console.log(`${list[item].status}`);
+  listDisplay();
+  //document.querySelector(`#item_${item}`).style.backgroundColor = "#77E4C8";
 };
