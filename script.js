@@ -9,43 +9,6 @@ function addToList(title, description) {
   });
 }
 
-function addMass() {
-  addToList(
-    "Website Redesign",
-    "Revamp the company website for a modern look."
-  );
-  addToList(
-    "Marketing Campaign",
-    "Launch a new marketing campaign targeting millennials."
-  );
-  addToList("Product Launch", "Prepare for the upcoming product release.");
-  addToList(
-    "Client Feedback Survey",
-    "Gather feedback from clients about the recent service."
-  );
-  addToList(
-    "Mobile App Update",
-    "Release an update for the mobile app with bug fixes."
-  );
-  addToList(
-    "Annual Report",
-    "Create and review the company’s annual performance report."
-  );
-  addToList(
-    "Social Media Strategy",
-    "Plan the next quarter’s social media strategy."
-  );
-  addToList("Team Meeting", "Hold a weekly meeting with the development team.");
-  addToList(
-    "Client Presentation",
-    "Prepare slides for the next client pitch meeting."
-  );
-  addToList(
-    "System Maintenance",
-    "Perform system maintenance on the company servers."
-  );
-}
-
 function listDisplay() {
   document.querySelector("#task_list").innerHTML = "";
   document.querySelector(".error").style.opacity = 0;
@@ -77,9 +40,6 @@ function listDisplay() {
   }
 }
 
-addMass();
-listDisplay();
-
 const newTask = function () {
   let task_title = document.querySelector("input[name='task_title']").value;
   let task_description = document.querySelector(
@@ -95,7 +55,6 @@ const newTask = function () {
   }
 
   addToList(task_title, task_description);
-  //document.querySelector("#task_list").innerHTML = "";
   listDisplay();
 };
 
@@ -152,5 +111,5 @@ const tasklist_item_check = function (item) {
   list[item].status = !list[item].status;
   console.log(`${list[item].status}`);
   listDisplay();
-  //document.querySelector(`#item_${item}`).style.backgroundColor = "#77E4C8";
 };
+listDisplay();
